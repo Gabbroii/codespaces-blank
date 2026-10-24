@@ -1,86 +1,102 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Acadêmico - Gustavo Italo de Oliveira</title>
-    <!-- Link para o arquivo CSS -->
+    <title>Perfil Académico - Gustavo Italo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Janela Modal / Banner de Boas-Vindas -->
-    <div class="modal-overlay">
-        <div class="welcome-box">
-            <h2>Bem-vindo(a)!</h2>
+    <!-- Janela de Boas-vindas -->
+    <div class="modal-overlay" id="modal">
+        <div class="welcome-box" style="background: var(--bg-color); padding: 20px; border: 1px solid var(--border-color);">
+            <h2 style="font-family: var(--font-mono);">Bem-vindo(a)!</h2>
             <p>Este é o meu Perfil Acadêmico.</p>
-            <button id="close-welcome">Entendi</button>
+            <button id="close-welcome" style="margin-top: 10px; cursor: pointer;">[ ENTENDI ]</button>
         </div>
     </div>
 
-    <!-- Cartão Principal do Perfil -->
-    <div class="profile-card">
-        
-        <!-- Cabeçalho Superior (Modo Escuro e Likes) -->
-        <header class="main-header">
-            <button id="btn-modo">Modo Escuro</button>
-            <span class="likes">Likes: 928</span>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="sys-header">
+            <span>CURRÍCULO ACADÊMICO</span>
+            <button id="btn-modo">[ MODO ESCURO ]</button>
         </header>
 
-        <!-- Cabeçalho do Perfil (Foto, Nome e Curso) -->
+        <!-- Perfil -->
         <div class="profile-header">
-            <!-- Substitua 'sua-foto.jpg' pelo caminho real da sua imagem -->
-            <img src="sua-foto.jpg" alt="Foto de Perfil" class="profile-img">
-            <h1>Gustavo Italo de Oliveira</h1>
-            <p class="course">Ciência da Computação</p>
+            <div class="image-wrapper">
+                <img src="sua-foto.jpg" alt="Foto de Perfil" class="profile-img">
+            </div>
+            <div class="title-wrapper">
+                <h1>Gustavo Italo de Oliveira</h1>
+                <h2>Ciência da Computação</h2>
+                <span class="status-badge">STATUS: ATIVO</span>
+            </div>
         </div>
 
-        <!-- Corpo do Perfil (Biografia, Hobbies e Botão de Contato) -->
-        <div class="profile-body">
+        <hr class="divider">
+
+        <div class="content-grid">
             
-            <!-- Seção Sobre Mim -->
-            <section class="bio-section">
-                <h3>Sobre Mim</h3>
-                <p>Estudante apaixonada por tecnologia e desenvolvimento web. Busco constantemente aprender novas ferramentas para criar soluções criativas e funcionais. No meu tempo livre, gosto de explorar o ecossistema de código aberto e participar de comunidades de programação.</p>
-            </section>
+            <!-- Coluna Principal -->
+            <div class="main-column">
+                <section class="bio-section">
+                    <h3>> SOBRE MIM</h3>
+                    <p>Estudante apaixonado por tecnologia e desenvolvimento web. Busco constantemente aprender novas ferramentas para criar soluções criativas e funcionais. No meu tempo livre, gosto de explorar o ecossistema de código aberto e participar de comunidades de programação.</p>
+                </section>
 
-            <!-- Seção Hobbies -->
-            <section class="hobbies-section">
-                <h3>Meus Hobbies</h3>
-                <ul>
-                    <li>Jogar videogame</li>
-                    <li>Ler livros</li>
-                    <li>Ouvir podcasts</li>
-                </ul>
-            </section>
+                <section class="subjects-section" style="padding-left: 0; padding-right: 0;">
+                    <h3>> DISCIPLINAS CURSANDO</h3>
+                    
+                    <div id="status-message" class="system-msg"></div>
 
-                               <section class="subjects-section">
-    <h3>Cursando...</h3>
-    <ul id="subjects-list">
-        <!-- O JavaScript vai preencher os itens aqui automaticamente! -->
-    </ul>
-</section>
+                    <!-- A lista será preenchida aqui -->
+                    <ul id="subjects-list"></ul>
 
-            <!-- Botão de Contato -->
-            <div class="action-container">
-                <button id="contact-btn">Entrar em Contato</button>
+                    <!-- Formulário estilizado -->
+                    <form action="" id="edit-forms" class="subject-form">
+                        <input type="hidden" id="id-disciplina">
+                        <input type="text" id="nome-disciplina" placeholder="NOME DA DISCIPLINA" required>
+                        <input type="number" id="semestre-disciplina" placeholder="SEM." required min="1" max="10">
+                        <button id="submit-btn" type="submit">[ GUARDAR ]</button>
+                    </form>
+
+                    <div id="mensagem-erro" class="system-msg" style="color: var(--accent-color);"></div>
+                </section>
             </div>
 
-            <!-- Link de Rede Social -->
-            <div class="social-container">
-                <a href="#" class="social-link" target="_blank">LinkedIn</a>
+            <!-- Coluna Lateral -->
+            <div class="side-column">
+                <section class="hobbies-section">
+                    <h3>> HOBBIES</h3>
+                    <ul class="tag-list">
+                        <li>Jogar Videogames</li>
+                        <li>Ver Filmes</li>
+                        <li>Estudar 3D</li>
+                    </ul>
+                </section>
+
+                <div class="action-container" style="margin-top: 30px;">
+                    <button id="contact-btn" class="outline-btn">
+                        > Entrar em Contato <
+                    </button>
+                </div>
             </div>
 
         </div>
 
-        <!-- Rodapé do Card -->
-        <footer class="profile-footer">
-            <p>Vejo que gostou de saber mais. Por favor entre em contato com @Gustavo</p>
+        <hr class="divider">
+
+        <!-- Rodapé -->
+        <footer class="sys-footer">
+            <a href="#" class="footer-link" target="_blank">[ LinkedIn ]</a>
+            <span style="font-family: var(--font-mono); font-size: 0.85rem;">USUÁRIO: @Gustavo</span>
         </footer>
 
     </div>
 
-    <!-- Script JavaScript (opcional, caso queira criar o script.js) -->
     <script src="script.js" defer></script>
 </body>
 </html>
