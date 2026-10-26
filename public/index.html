@@ -45,6 +45,17 @@
                 <section class="bio-section">
                     <h3>> SOBRE MIM</h3>
                     <p>Estudante apaixonado por tecnologia e desenvolvimento web. Busco constantemente aprender novas ferramentas para criar soluções criativas e funcionais. No meu tempo livre, gosto de explorar o ecossistema de código aberto e participar de comunidades de programação.</p>
+                    <p><strong>NOME:</strong> <span id="bio-nome">...</span></p>
+                    <p><strong>CURSO:</strong> <span id="bio-curso">...</span></p>
+                    <p><strong>ENDEREÇO:</strong> <span id="bio-endereco">Sem endereço salvo</span></p>
+                </section>
+
+                <section class="cep-section">
+                    <h3>> BUSCAR VIA CEP</h3>
+                    <input type="text" id="input-cep" placeholder="Digite o CEP">
+                    <button id="btn-buscar-cep">BUSCAR</button>
+                    <button id="btn-salvar-perfil">[ SALVAR ENDEREÇO ]</button>
+                    <div id="resultado-endereco"></div>
                 </section>
 
                 <section class="subjects-section" style="padding-left: 0; padding-right: 0;">
@@ -58,8 +69,8 @@
                     <!-- Formulário estilizado -->
                     <form action="" id="edit-forms" class="subject-form">
                         <input type="hidden" id="id-disciplina">
-                        <input type="text" id="nome-disciplina" placeholder="NOME DA DISCIPLINA" required>
-                        <input type="number" id="semestre-disciplina" placeholder="SEM." required min="1" max="10">
+                        <input type="text" id="nome-disciplina" placeholder="NOME DA DISCIPLINA">
+                        <input type="number" id="semestre-disciplina" placeholder="SEM." min="1" max="16">
                         <button id="submit-btn" type="submit">[ GUARDAR ]</button>
                     </form>
 

@@ -9,15 +9,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputSemestre = document.getElementById('semestre-disciplina');
     const inputId = document.getElementById('id-disciplina');
     const submitBtn = document.getElementById('submit-btn');
+    const inputCep = document.getElementById('input-cep');
+    const btnBuscarCep = document.getElementById('btn-buscar-cep');
+    const divResultadoCep = document.getElementById('resultado-endereco');
+
+btnBuscarCep.addEventListener('click', async () => {
+    
+    // Pegamos o texto que o utilizador escreveu
+    let cepDigitado = inputCep.value;
+    
+    // Montamos a URL juntando o endereço do ViaCEP com o CEP digitado
+    let urlViaCep = `https://viacep.com.br/ws/${cepDigitado}/json/`;
+
+    divResultadoCep.innerHTML = 'A buscar...';
+
+    try {
+        let resposta = await fetch(urlViaCep);
+            
+            if (!resposta.ok) { 
+                throw new Error('Erro de comunicação com a API.');
+            }
+        let dadosCep = await resposta.json();
+
+        if (dadosCep.erro) {
+    throw new Error('O CEP não existe.');
+}
+
+        console.log("Chegou do ViaCEP:", dadosCep);
+
+        divResultadoCep.innerHTML = `
+            > RUA: ${dadosCep.logradouro} <br>
+            > BAIRRO: ${dadosCep.bairro} <br>
+            > CIDADE: ${dadosCep.localidade} - ${dadosCep.uf}
+        `;
+        
+    } catch (erro) {
+        divResultadoCep.innerHTML = '[ERRO] Falha ao buscar o CEP.';
+    }
+});
 
     // 1. CARREGAR DISCIPLINAS DA API
     async function carregarDisciplinas() {
         status.innerHTML = 'A carregar dados...';
         
         try {
-            let resposta = await fetch('/api/disciplinas');
+            let resposta = await fetch('/api/disciplinas/');
             
-            if (!resposta.ok) { // '!resposta.ok' é o mesmo que 'resposta.ok == false', fica mais limpo
+            if (!resposta.ok) { 
                 throw new Error('Erro ao ligar ao servidor.');
             }
             
@@ -25,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             lista.innerHTML = ''; 
             
-            // Usando 'for...of' (mais moderno e legível que o for com 'i')
             for (let d of disciplinas) {
                 let li = document.createElement('li');
                 li.className = 'subject-item';
@@ -46,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     inputSemestre.value = d.semestre;
                     inputId.value = d.id; 
                     
-                    // Muda o texto do botão (Corrigido erro de concatenação +=)
+                    // Muda o texto do botão
                     submitBtn.textContent = '[ EDITANDO... ]';
                 });
                 
@@ -61,7 +98,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Chamada inicial
+    async function carregarPerfil() {
+    try {
+        let resposta = await fetch('/api/perfil');
+        let perfilDaApi = await resposta.json();
+        
+
+        document.getElementById('bio-nome').textContent = perfilDaApi.nome;
+        document.getElementById('bio-curso').textContent = perfilDaApi.curso;
+        
+
+        if (perfilDaApi.endereco) {
+            document.getElementById('bio-endereco').textContent = perfilDaApi.endereco;
+        } else {
+            document.getElementById('bio-endereco').textContent = "---";
+        }
+    } catch (erro) {
+        console.error('Erro ao carregar o perfil:', erro);
+    }
+}
+
+const btnSalvarPerfil = document.getElementById('btn-salvar-perfil');
+
+btnSalvarPerfil.addEventListener('click', async () => {
+
+    let textoEndereco = divResultadoCep.innerText;
+
+
+    try {
+        let resposta = await fetch('/api/perfil', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nome: "Gustavo Italo de Oliveira", // O nome exigido na validação
+                curso: "Ciência da Computação",    // O curso exigido na validação
+                endereco: textoEndereco            // O novo endereço
+            })
+        });
+
+        if (resposta.ok) {
+            carregarPerfil(); 
+            divResultadoCep.innerHTML = 'Endereço salvo com sucesso!';
+        }
+    } catch (erro) {
+        console.error('Erro ao salvar:', erro);
+    }
+});
+
+
+    carregarPerfil();
     carregarDisciplinas();
 
 

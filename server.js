@@ -13,12 +13,23 @@ let disciplinas = [
  { id: 3, nome: "GERENCIA DE PROJETOS", semestre: 4 },
  { id: 4, nome: "SISTEMAS DE APOIO A DECISÃO", semestre: 4 }
 ];
-let proximoId = 3;
+let proximoId = 5; 
+
+let perfil = {
+  nome: 'Gustavo Italo de Oliveira',
+  curso: 'Ciência da Computação',
+  endereco: null
+};
 
 // Rota inicial
 app.get("/", (req, res) => {
   res.send("API a rodar!");
 });
+
+
+      ///////////////////////////////
+      //////  ROTAS DISCIPLINA  /////
+      ///////////////////////////////
 
 // GET - Listar disciplinas
 app.get("/api/disciplinas", (req, res) => {
@@ -27,21 +38,20 @@ app.get("/api/disciplinas", (req, res) => {
 
 // POST - Criar disciplina
 app.post("/api/disciplinas", (req, res) => {
-  let nomeRecebido = req.body.nome;
-  let semestreRecebido = req.body.semestre;
+  let { nome, semestre } = req.body;
 
-  if (nomeRecebido == undefined) {
-    return res.status(400).json({ erro: "O campo nome é obrigatório" });
+  if (!nome || nome.trim() === '') {
+    return res.status(400).send('O nome e o semestre não podem estar vazios.');
   }
 
   let novaDisciplina = { 
     id: proximoId, 
-    nome: nomeRecebido, 
-    semestre: semestreRecebido 
+    nome: nome, 
+    semestre: semestre 
   };
   
-  proximoId = proximoId + 1; // Prepara o próximo ID
-  disciplinas.push(novaDisciplina); // Adiciona na lista
+  proximoId = proximoId + 1; 
+  disciplinas.push(novaDisciplina); 
   
   res.status(201).json(novaDisciplina);
 });
@@ -49,8 +59,12 @@ app.post("/api/disciplinas", (req, res) => {
 // PUT - Editar disciplina
 app.put("/api/disciplinas/:id", (req, res) => {
   let idNaUrl = Number(req.params.id);
+  let { nome, semestre } = req.body;
+
+  if (!nome || nome.trim() === '') {
+    return res.status(400).send('O nome e o semestre não podem estar vazios.');
+  }
   
-  // Procura a disciplina na lista
   let disciplinaEncontrada = null;
   for (let i = 0; i < disciplinas.length; i++) {
     if (disciplinas[i].id === idNaUrl) {
@@ -63,18 +77,40 @@ app.put("/api/disciplinas/:id", (req, res) => {
     return res.status(404).json({ erro: "Disciplina não encontrada" });
   }
   
-  let nomeRecebido = req.body.nome;
-  
-  if (nomeRecebido == undefined) {
-    return res.status(400).json({ erro: "O campo nome é obrigatório" });
-  }
-  
   // Atualiza os dados
-  disciplinaEncontrada.nome = nomeRecebido;
-  disciplinaEncontrada.semestre = req.body.semestre;
+  disciplinaEncontrada.nome = nome;
+  disciplinaEncontrada.semestre = semestre;
   
   res.json(disciplinaEncontrada);
 });
+
+
+      ///////////////////////////////
+      //////     ROTAS CEP      /////
+      ///////////////////////////////
+
+
+
+app.get("/api/perfil", (req, res) => {
+  res.json(perfil);
+});
+
+app.put("/api/perfil", (req, res) => {
+  let { nome, curso, endereco } = req.body;
+
+  if (!nome || !curso)
+  {
+    return res.status(400).send('Não foi possível indentificar o nome ou o curso');
+  }
+
+  perfil.nome = nome;
+  perfil.curso = curso;
+  perfil.endereco = endereco;
+
+  res.json(perfil);
+});
+
+
 
 app.listen(port, () => {
   console.log(`Servidor a rodar na porta ${port}`);
