@@ -1,113 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-PT">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Académico - Gustavo Italo</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <!-- Janela de Boas-vindas -->
-    <div class="modal-overlay" id="modal">
-        <div class="welcome-box" style="background: var(--bg-color); padding: 20px; border: 1px solid var(--border-color);">
-            <h2 style="font-family: var(--font-mono);">Bem-vindo(a)!</h2>
-            <p>Este é o meu Perfil Acadêmico.</p>
-            <button id="close-welcome" style="margin-top: 10px; cursor: pointer;">[ ENTENDI ]</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Cabeçalho -->
-        <header class="sys-header">
-            <span>CURRÍCULO ACADÊMICO</span>
-            <button id="btn-modo">[ MODO ESCURO ]</button>
-        </header>
-
-        <!-- Perfil -->
-        <div class="profile-header">
-            <div class="image-wrapper">
-                <img src="sua-foto.jpg" alt="Foto de Perfil" class="profile-img">
-            </div>
-            <div class="title-wrapper">
-                <h1>Gustavo Italo de Oliveira</h1>
-                <h2>Ciência da Computação</h2>
-                <span class="status-badge">STATUS: ATIVO</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Perfil Académico - Gustavo Italo</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- Janela de Boas-vindas -->
+        <div class="modal-overlay" id="modal">
+            <div
+                class="welcome-box"
+                style="
+                    background: var(--bg-color);
+                    padding: 20px;
+                    border: 1px solid var(--border-color);
+                "
+            >
+                <h2 style="font-family: var(--font-mono)">Bem-vindo(a)!</h2>
+                <p>Este é o meu Perfil Acadêmico.</p>
+                <button
+                    id="close-welcome"
+                    style="margin-top: 10px; cursor: pointer"
+                >
+                    [ ENTENDI ]
+                </button>
             </div>
         </div>
 
-        <hr class="divider">
+        <div class="container">
+            <!-- Cabeçalho -->
+            <header class="sys-header">
+                <span>CURRÍCULO ACADÊMICO</span>
+                <button id="btn-modo">[ MODO ESCURO ]</button>
+            </header>
 
-        <div class="content-grid">
-            
-            <!-- Coluna Principal -->
-            <div class="main-column">
-                <section class="bio-section">
-                    <h3>> SOBRE MIM</h3>
-                    <p>Estudante apaixonado por tecnologia e desenvolvimento web. Busco constantemente aprender novas ferramentas para criar soluções criativas e funcionais. No meu tempo livre, gosto de explorar o ecossistema de código aberto e participar de comunidades de programação.</p>
-                    <p><strong>NOME:</strong> <span id="bio-nome">...</span></p>
-                    <p><strong>CURSO:</strong> <span id="bio-curso">...</span></p>
-                    <p><strong>ENDEREÇO:</strong> <span id="bio-endereco">Sem endereço salvo</span></p>
-                </section>
-
-                <section class="cep-section">
-                    <h3>> BUSCAR VIA CEP</h3>
-                    <input type="text" id="input-cep" placeholder="Digite o CEP">
-                    <button id="btn-buscar-cep">BUSCAR</button>
-                    <button id="btn-salvar-perfil">[ SALVAR ENDEREÇO ]</button>
-                    <div id="resultado-endereco"></div>
-                </section>
-
-                <section class="subjects-section" style="padding-left: 0; padding-right: 0;">
-                    <h3>> DISCIPLINAS CURSANDO</h3>
-                    
-                    <div id="status-message" class="system-msg"></div>
-
-                    <!-- A lista será preenchida aqui -->
-                    <ul id="subjects-list"></ul>
-
-                    <!-- Formulário estilizado -->
-                    <form action="" id="edit-forms" class="subject-form">
-                        <input type="hidden" id="id-disciplina">
-                        <input type="text" id="nome-disciplina" placeholder="NOME DA DISCIPLINA">
-                        <input type="number" id="semestre-disciplina" placeholder="SEM." min="1" max="16">
-                        <button id="submit-btn" type="submit">[ GUARDAR ]</button>
-                    </form>
-
-                    <div id="mensagem-erro" class="system-msg" style="color: var(--accent-color);"></div>
-                </section>
-            </div>
-
-            <!-- Coluna Lateral -->
-            <div class="side-column">
-                <section class="hobbies-section">
-                    <h3>> HOBBIES</h3>
-                    <ul class="tag-list">
-                        <li>Jogar Videogames</li>
-                        <li>Ver Filmes</li>
-                        <li>Estudar 3D</li>
-                    </ul>
-                </section>
-
-                <div class="action-container" style="margin-top: 30px;">
-                    <button id="contact-btn" class="outline-btn">
-                        > Entrar em Contato <
-                    </button>
+            <!-- Perfil -->
+            <div class="profile-header">
+                <div class="image-wrapper">
+                    <img
+                        src="sua-foto.jpg"
+                        alt="Foto de Perfil"
+                        class="profile-img"
+                    />
+                </div>
+                <div class="title-wrapper">
+                    <h1>Gustavo Italo de Oliveira</h1>
+                    <h2>Ciência da Computação</h2>
+                    <span class="status-badge">STATUS: ATIVO</span>
                 </div>
             </div>
 
+            <hr class="divider" />
+
+            <div class="content-grid">
+                <!-- Coluna Principal -->
+                <div class="main-column">
+                    <section class="bio-section">
+                        <h3>> SOBRE MIM</h3>
+                        <p>
+                            Estudante apaixonado por tecnologia e
+                            desenvolvimento web. Busco constantemente aprender
+                            novas ferramentas para criar soluções criativas e
+                            funcionais. No meu tempo livre, gosto de explorar o
+                            ecossistema de código aberto e participar de
+                            comunidades de programação.
+                        </p>
+                        <p>
+                            <strong>NOME:</strong>
+                            <span id="bio-nome">...</span>
+                        </p>
+                        <p>
+                            <strong>CURSO:</strong>
+                            <span id="bio-curso">...</span>
+                        </p>
+                        <p>
+                            <strong>ENDEREÇO:</strong>
+                            <span id="bio-endereco">Sem endereço salvo</span>
+                        </p>
+                    </section>
+
+                    <section class="cep-section">
+                        <h3>> BUSCAR VIA CEP</h3>
+                        <input
+                            type="text"
+                            id="input-cep"
+                            placeholder="Digite o CEP"
+                        />
+                        <button id="btn-buscar-cep">BUSCAR</button>
+                        <button id="btn-salvar-perfil">
+                            [ SALVAR ENDEREÇO ]
+                        </button>
+                        <div id="resultado-endereco"></div>
+                    </section>
+
+                    <section
+                        class="subjects-section"
+                        style="padding-left: 0; padding-right: 0"
+                    >
+                        <h3>> DISCIPLINAS CURSANDO</h3>
+
+                        <div id="status-message" class="system-msg"></div>
+
+                        <!-- A lista será preenchida aqui -->
+                        <ul id="subjects-list"></ul>
+
+                        <!-- Formulário estilizado -->
+                        <form action="" id="edit-forms" class="subject-form">
+                            <input type="hidden" id="id-disciplina" />
+                            <input
+                                type="text"
+                                id="nome-disciplina"
+                                placeholder="NOME DA DISCIPLINA"
+                            />
+                            <input
+                                type="number"
+                                id="semestre-disciplina"
+                                placeholder="SEM."
+                                min="1"
+                                max="16"
+                            />
+                            <button id="submit-btn" type="submit">
+                                [ GUARDAR ]
+                            </button>
+                        </form>
+
+                        <div
+                            id="mensagem-erro"
+                            class="system-msg"
+                            style="color: var(--accent-color)"
+                        ></div>
+                    </section>
+                </div>
+
+                <!-- Coluna Lateral -->
+                <div class="side-column">
+                    <section class="hobbies-section">
+                        <h3>> HOBBIES</h3>
+                        <ul class="tag-list">
+                            <li>Jogar Videogames</li>
+                            <li>Ver Filmes</li>
+                            <li>Estudar 3D</li>
+                        </ul>
+                    </section>
+
+                    <div class="action-container" style="margin-top: 30px">
+                        <button id="contact-btn" class="outline-btn">
+                            > Entrar em Contato <
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <!-- Rodapé -->
+            <footer class="sys-footer">
+                <a href="#" class="footer-link" target="_blank">[ LinkedIn ]</a>
+                <span style="font-family: var(--font-mono); font-size: 0.85rem"
+                    >USUÁRIO: @Gustavo</span
+                >
+            </footer>
         </div>
 
-        <hr class="divider">
-
-        <!-- Rodapé -->
-        <footer class="sys-footer">
-            <a href="#" class="footer-link" target="_blank">[ LinkedIn ]</a>
-            <span style="font-family: var(--font-mono); font-size: 0.85rem;">USUÁRIO: @Gustavo</span>
-        </footer>
-
-    </div>
-
-    <script src="script.js" defer></script>
-</body>
+        <script src="script.js" defer></script>
+    </body>
 </html>
